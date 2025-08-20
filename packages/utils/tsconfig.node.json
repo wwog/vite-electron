@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "dist/tsconfig.node.tsbuildinfo",
+    "types": ["node"],
+    "rootDir": "node",
+    "emitDeclarationOnly": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["node/**/*.ts", "node/**/*.mts", "node/**/*.d.ts"]
+}

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.electron.tsbuildinfo",
+    "types": ["node", "electron"],
+    "rootDir": "electron",
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["electron/**/*.ts", "electron/**/*.mts", "electron/**/*.d.ts"],
+  "references": []
+}

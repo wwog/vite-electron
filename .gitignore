@@ -1,0 +1,22 @@
+# Local
+.DS_Store
+*.local
+*.log*
+pnpm-lock.yaml
+app/*
+!app/package.json
+
+# Dist
+.cache
+node_modules
+dist
+build
+release
+
+# Profile
+.rspack-profile-*/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea

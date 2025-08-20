@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "dist/tsconfig.web.tsbuildinfo",
+    "lib": ["DOM", "ESNext"],
+    "rootDir": "web",
+    "emitDeclarationOnly": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["web/**/*.ts", "web/**/*.mts", "web/**/*.d.ts"]
+}

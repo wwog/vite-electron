@@ -1,0 +1,31 @@
+{
+  "name": "vite-electron",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "private": true,
+  "author": "wwog",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1",
+  "scripts": {
+    "start": "concurrently \"pnpm run:renderer\" \"pnpm run:main\"",
+    "run:main": "cross-env ELECTRON_ENABLE_LOGGING=true pnpm -F preload run build:dev && pnpm -F main run dev",
+    "run:renderer": "pnpm --filter renderer run dev",
+    "postinstall": "pnpm installApp",
+    "installApp": "tsx ./scripts/installApp.mts",
+    "clearDeps": "tsx ./scripts/clearDeps.mts"
+  },
+  "devDependencies": {
+    "vite": "npm:rolldown-vite@latest",
+    "rolldown": "latest",
+    "electron": "^37",
+    "electron-builder": "^26",
+    "tsx": "^4",
+    "typescript": "^5.9.2",
+    "@types/node": "^24.3.0",
+    "cross-env": "^10.0.0",
+    "concurrently": "latest",
+    "@biomejs/biome": "^2.2.0",
+    "@electron/rebuild": "^4.0.1"
+  }
+}

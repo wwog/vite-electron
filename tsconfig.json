@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "include": ["scripts/**/*.ts", "scripts/**/*.mts"],
+  "references": []
+}

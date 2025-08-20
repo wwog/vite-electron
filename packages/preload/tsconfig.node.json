@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "types": ["node", "electron"],
+    "rootDir": "src",
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "dist",
+    "build",
+    "coverage",
+    "scripts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts"
+  ],
+  "references": []
+}

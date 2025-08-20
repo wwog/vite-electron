@@ -1,0 +1,9 @@
+{
+  "name": "preload",
+  "private": true,
+  "scripts": {
+    "build": "rolldown -c config/rolldown.prod.ts && pnpm copy2app",
+    "build:dev": "rolldown -c config/rolldown.dev.ts && pnpm copy2app",
+    "copy2app": "tsx scripts/copy2app.mts"
+  }
+}

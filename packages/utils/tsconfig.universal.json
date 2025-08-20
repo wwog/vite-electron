@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "dist/tsconfig.universal.tsbuildinfo",
+    "lib": ["ESNext"],
+    "rootDir": "universal",
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["universal/**/*.ts", "universal/**/*.mts", "universal/**/*.d.ts"]
+}

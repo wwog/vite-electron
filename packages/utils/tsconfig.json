@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.universal.json"
+    },
+    {
+      "path": "./tsconfig.web.json"
+    },
+    {
+      "path": "./tsconfig.electron.json"
+    }
+  ]
+}

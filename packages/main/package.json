@@ -1,0 +1,12 @@
+{
+  "name": "main",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS=\"--import tsx\" electron ./src/index.ts",
+    "build": "rolldown -c config/rolldown.prod.ts",
+    "build:dev": "rolldown -c config/rolldown.dev.ts"
+  },
+  "dependencies": {
+    "utils": "workspace:*"
+  }
+}
