@@ -72,7 +72,6 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
       addDidFailedLoadHandle(browserWindow, config.page);
       runHooks("afterCreate");
 
-      // biome-ignore lint/style/noNonNullAssertion: <ignore>
       return browserWindow!;
     },
     show() {
