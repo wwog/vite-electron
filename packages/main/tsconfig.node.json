@@ -8,7 +8,7 @@
     "module": "esnext",
     "moduleResolution": "bundler"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../utils/electron/main/path.ts"],
   "exclude": [
     "dist",
     "build",
@@ -17,5 +17,4 @@
     "src/**/*.test.ts",
     "src/**/*.spec.ts"
   ],
-  "references": []
 }

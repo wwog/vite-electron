@@ -11,8 +11,7 @@
     ".": "./universal/index.ts",
     "./node": "./node/index.ts",
     "./web": "./web/index.ts",
-    "./electron": "./electron/index.ts",
-    "./electron/main": "./electron/main/index.ts",
-    "./electron/renderer": "./electron/renderer/index.ts"
+    "./electron_main": "./electron/main/index.ts",
+    "./electron_renderer": "./electron/renderer/index.ts"
   }
 }

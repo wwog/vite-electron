@@ -4,12 +4,7 @@ import {
 } from "electron/main";
 import { resolveHtmlPath, resolvePreloadPath } from "../path";
 import { addDidFailedLoadHandle } from "./handle";
-import type {
-  ManagedWindow,
-  WindowBuilder,
-  WindowConfig,
-  WindowHook,
-} from "./type";
+import type { ManagedWindow, WindowBuilder, WindowConfig } from "./type";
 
 // Default base options
 const defaultOptions: BrowserWindowConstructorOptions = {
@@ -29,10 +24,15 @@ const defaultOptions: BrowserWindowConstructorOptions = {
 function createManagedWindow(config: WindowConfig): ManagedWindow {
   let browserWindow: BrowserWindow | null = null;
 
-  // Helper to run hooks
-  const runHooks = (hookType: keyof WindowConfig["hooks"]) => {
-    for (const hook of config.hooks[hookType]) {
-      hook();
+  const runBeforeCreates = () => {
+    for (const hook of config.hooks.beforeCreate) {
+      hook(config.options);
+    }
+  };
+
+  const runAfterCreates = () => {
+    for (const hook of config.hooks.afterCreate) {
+      hook(browserWindow!);
     }
   };
 
@@ -44,8 +44,10 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
         return browserWindow;
       }
 
-      runHooks("beforeCreate");
+      runBeforeCreates();
       browserWindow = new BrowserWindow(config.options);
+      runAfterCreates();
+
       const url = resolveHtmlPath(config.page);
       console.log(
         `Window [${config.page}] created with senderId: ${browserWindow?.webContents.id}, Url: ${url}`
@@ -70,7 +72,6 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
 
       // Add more registrations as needed, e.g., maximize/unmaximize
       addDidFailedLoadHandle(browserWindow, config.page);
-      runHooks("afterCreate");
 
       return browserWindow!;
     },
@@ -115,10 +116,12 @@ export function windowBuilder(page: string): WindowBuilder {
       };
       return builder;
     },
-    withHook(hookType: keyof WindowConfig["hooks"], hook: WindowHook) {
-      if (hookType in config.hooks) {
-        config.hooks[hookType].push(hook); // Type assertion for simplicity
-      }
+    withAfterCreate(hook) {
+      config.hooks.afterCreate.push(hook);
+      return builder;
+    },
+    withBeforeCreate(hook) {
+      config.hooks.beforeCreate.push(hook);
       return builder;
     },
     build() {

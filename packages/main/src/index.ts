@@ -1,9 +1,9 @@
 import { app } from "electron";
-import { windowBuilder } from "./lib/window";
+import { homeWindow } from "./windows/home";
 
 async function main() {
   await app.whenReady();
-  const home = windowBuilder("home").build();
+  const home = homeWindow();
   home.create();
 }
 

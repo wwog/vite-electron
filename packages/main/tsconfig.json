@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../utils/electron/main/path.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

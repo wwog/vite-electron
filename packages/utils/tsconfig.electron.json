@@ -9,5 +9,5 @@
     "moduleResolution": "bundler"
   },
   "include": ["electron/**/*.ts", "electron/**/*.mts", "electron/**/*.d.ts"],
-  "references": []
+  "references": [{ "path": "./tsconfig.universal.json" }]
 }

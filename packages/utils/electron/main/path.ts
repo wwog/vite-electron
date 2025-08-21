@@ -1,6 +1,6 @@
 import { app } from "electron";
 import { join, resolve } from "node:path";
-import { isDev, getPort } from "utils";
+import { getPort, isDev } from "../../universal";
 
 export function resolvePreloadPath(): string {
   return app.isPackaged

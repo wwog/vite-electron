@@ -10,28 +10,28 @@ export interface ManagedWindow {
   // Add more methods as needed
 }
 
+// Type definitions for hooks (lifecycle callbacks)
+export type BeforeCreate = (config: BrowserWindowConstructorOptions) => void;
+export type AfterCreate = (
+  browserWindow: Omit<BrowserWindow, "loadURL">
+) => void;
+
 // Chainable builder interface
 export interface WindowBuilder {
   withOptions: (
     opts: Partial<BrowserWindowConstructorOptions>
   ) => WindowBuilder;
-  withHook: (
-    hookType: keyof WindowConfig["hooks"],
-    hook: WindowHook
-  ) => WindowBuilder;
+  withBeforeCreate: (hook: BeforeCreate) => WindowBuilder;
+  withAfterCreate: (hook: AfterCreate) => WindowBuilder;
   build: () => ManagedWindow;
 }
-
-// Type definitions for hooks (lifecycle callbacks)
-export type WindowHook = () => void;
 
 // Core configuration interface for the window
 export interface WindowConfig {
   page: string; // e.g., 'home', 'meeting'
   options: BrowserWindowConstructorOptions;
   hooks: {
-    beforeCreate: WindowHook[];
-    afterCreate: WindowHook[];
-    // Add more lifecycle hooks as needed, e.g., onClose, onShow
+    beforeCreate: BeforeCreate[];
+    afterCreate: AfterCreate[];
   };
 }
