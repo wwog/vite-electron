@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <ignore> */
 import type { RolldownOptions } from "rolldown";
 
 function deepMerge<T extends Record<string, any>>(
@@ -12,7 +13,7 @@ function deepMerge<T extends Record<string, any>>(
     if (!source) continue;
 
     for (const key in source) {
-      if (!source.hasOwnProperty(key)) continue;
+      if (!Object.hasOwn(source, key)) continue;
 
       const sourceValue = source[key];
       const targetValue = result[key];
