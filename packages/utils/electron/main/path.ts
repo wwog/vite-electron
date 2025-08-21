@@ -4,8 +4,8 @@ import { getPort, isDev } from "../../universal";
 
 export function resolvePreloadPath(): string {
   return app.isPackaged
-    ? join(__dirname, "../preload/preload.js")
-    : join(process.cwd(), "../../app/preload/preload.js");
+    ? join(__dirname, "../preload/index.js")
+    : join(process.cwd(), "../../app/preload/index.js");
 }
 
 /**

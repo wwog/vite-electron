@@ -17,11 +17,7 @@ declare global {
 
 if (process.contextIsolated) {
   contextBridge.exposeInMainWorld("electron", exposeApi());
-  contextBridge.executeInMainWorld({
-    func() {
-      console.log("Preload Type : ContextBridge");
-    },
-  });
+  console.log("Preload Type : ContextBridge");
 } else {
   window.electron = exposeApi();
   console.log("Preload Type : Compatibility");
