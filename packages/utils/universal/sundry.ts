@@ -7,3 +7,12 @@ export function isProd() {
 export function getPort() {
   return Number(process.env.PORT) || 8163;
 }
+export function isMac() {
+  return process.platform === "darwin";
+}
+export function isWin() {
+  return process.platform === "win32";
+}
+export function isLinux() {
+  return process.platform === "linux";
+}

@@ -1,5 +1,9 @@
 import { app } from "electron";
 import { homeWindow } from "./windows/home";
+import { setupCurrentWorkingDirectory } from "utils/electron_main";
+
+//boot
+setupCurrentWorkingDirectory();
 
 async function main() {
   await app.whenReady();
