@@ -2,12 +2,12 @@ import type { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 
 // Managed window instance with methods
 export interface ManagedWindow {
-  create: () => BrowserWindow;
+  create: (extraOptions?: BrowserWindowConstructorOptions) => BrowserWindow;
   show: () => void;
   hide: () => void;
   switchShow: () => void;
   close: () => void;
-  // Add more methods as needed
+  getBrowserWindow: () => BrowserWindow | undefined;
 }
 
 // Type definitions for hooks (lifecycle callbacks)

@@ -5,6 +5,7 @@ import {
 import { resolveHtmlPath, resolvePreloadPath } from "../path";
 import { addDidFailedLoadHandle } from "./handle";
 import type { ManagedWindow, WindowBuilder, WindowConfig } from "./type";
+import { deepMerge } from "../../../universal";
 
 // Default base options
 const defaultOptions: BrowserWindowConstructorOptions = {
@@ -22,7 +23,7 @@ const defaultOptions: BrowserWindowConstructorOptions = {
 
 // Internal function to create the managed window instance
 function createManagedWindow(config: WindowConfig): ManagedWindow {
-  let browserWindow: BrowserWindow | null = null;
+  let browserWindow: BrowserWindow | undefined;
 
   const runBeforeCreates = () => {
     for (const hook of config.hooks.beforeCreate) {
@@ -36,8 +37,8 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
     }
   };
 
-  const managed = {
-    create() {
+  const managed: ManagedWindow = {
+    create(extra: BrowserWindowConstructorOptions = {}) {
       if (browserWindow && !browserWindow.isDestroyed()) {
         browserWindow.show();
         browserWindow.focus();
@@ -45,14 +46,15 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
       }
 
       runBeforeCreates();
-      browserWindow = new BrowserWindow(config.options);
+      const mergeOptions = deepMerge({}, config.options, extra);
+      browserWindow = new BrowserWindow(mergeOptions);
       runAfterCreates();
 
       const url = resolveHtmlPath(config.page);
       console.log(
         `Window [${config.page}] created with senderId: ${browserWindow?.webContents.id}, Url: ${url}`
       );
-      console.log(`Config`, config);
+      console.log(`Config`, mergeOptions);
       browserWindow.loadURL(url);
 
       browserWindow.once("ready-to-show", () => {
@@ -66,7 +68,7 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
           browserWindow?.hide();
         } else {
           browserWindow?.removeAllListeners();
-          browserWindow = null;
+          browserWindow = undefined;
         }
       });
 
@@ -88,6 +90,9 @@ function createManagedWindow(config: WindowConfig): ManagedWindow {
     },
     close() {
       browserWindow?.close();
+    },
+    getBrowserWindow() {
+      return browserWindow;
     },
   };
 
